@@ -15,12 +15,11 @@ public class CorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOrigins(
-                            "https://hrms-ems-react-eta.vercel.app",
-                            "http://localhost:5173"
+                                "http://localhost:5173",
+                                "https://hrms-ems-react-eta.vercel.app"
                         )
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*")
-                        .allowCredentials(true);
+                        .allowedMethods("*")
+                        .allowedHeaders("*");
             }
         };
     }
