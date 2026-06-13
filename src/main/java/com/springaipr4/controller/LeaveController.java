@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/leave")
-@CrossOrigin(origins = "*")
+
 public class LeaveController {
 
     @Autowired

@@ -9,23 +9,26 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/attendance")
-@CrossOrigin(origins = "*")
+@RequestMapping("/api/attendance")
+
 public class AttendanceController {
 
     @Autowired
     private AttendanceService attendanceService;
 
+    // ➜ Check-in
     @PostMapping("/checkin/{employeeId}")
     public Attendance checkIn(@PathVariable Long employeeId) {
         return attendanceService.checkIn(employeeId);
     }
 
+    // ➜ Check-out
     @PostMapping("/checkout/{employeeId}")
     public Attendance checkOut(@PathVariable Long employeeId) {
         return attendanceService.checkOut(employeeId);
     }
 
+    // ➜ Monthly summary
     @GetMapping("/summary/{employeeId}/{year}/{month}")
     public AttendanceSummary getSummary(
             @PathVariable Long employeeId,
@@ -35,21 +38,21 @@ public class AttendanceController {
         return attendanceService.getMonthlySummary(employeeId, year, month);
     }
 
-    // TODAY ATTENDANCE
+    // ➜ Today attendance
     @GetMapping("/today")
     public List<Attendance> getTodayAttendance() {
         return attendanceService.getTodayAttendance();
     }
 
-    // ALL ATTENDANCE REPORTS
-    @GetMapping("/all")
+    // ➜ All attendance records
+    @GetMapping
     public List<Attendance> getAllAttendance() {
         return attendanceService.getAllAttendance();
     }
-    @GetMapping("/employee/{employeeId}")
-    public List<Attendance> getEmployeeAttendance(
-            @PathVariable Long employeeId) {
 
+    // ➜ Employee attendance history
+    @GetMapping("/employee/{employeeId}")
+    public List<Attendance> getEmployeeAttendance(@PathVariable Long employeeId) {
         return attendanceService.getEmployeeAttendance(employeeId);
     }
 }

@@ -10,8 +10,8 @@ import com.springaipr4.entity.Employee;
 import com.springaipr4.repo.EmployeeRepo;
 
 @RestController
-@RequestMapping("/auth")
-@CrossOrigin("*")
+@RequestMapping("/api/auth")
+
 public class AuthController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class AuthController {
 
         Map<String, Object> response = new HashMap<>();
 
-        // ---------------- ADMIN LOGIN ----------------
+        // ADMIN LOGIN
         if ("admin".equals(username) && "admin123".equals(password)) {
 
             response.put("token", "admin-token");
@@ -36,10 +36,9 @@ public class AuthController {
             return response;
         }
 
-        // ---------------- EMPLOYEE LOGIN ----------------
+        // EMPLOYEE LOGIN
         Employee emp = employeeRepo.findByEmail(username);
 
-        // ✅ SAFE NULL HANDLING FIX
         if (emp != null && emp.getPassword() != null && password != null
                 && password.equals(emp.getPassword())) {
 
@@ -52,7 +51,7 @@ public class AuthController {
             return response;
         }
 
-        // ---------------- INVALID LOGIN ----------------
+        // INVALID
         response.put("token", "");
         response.put("role", "INVALID");
         response.put("employeeId", -1);
