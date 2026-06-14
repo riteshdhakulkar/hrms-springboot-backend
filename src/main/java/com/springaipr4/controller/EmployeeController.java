@@ -17,38 +17,38 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    // ➜ Add Employee
+    //  Add Employee
     @PostMapping
     public Employee addEmployee(@RequestBody Employee employee) {
         return employeeService.AddData(employee);
     }
 
-    // ➜ Update Employee
+    //  Update Employee
     @PutMapping
     public ResponseEntity<?> updateEmployee(@RequestBody Employee employee) {
         employeeService.updateData(employee);
         return ResponseEntity.ok("User updated successfully");
     }
 
-    // ➜ Get Employee by Email
+    //  Get Employee by Email
     @GetMapping("/email")
     public ResponseEntity<?> getEmployeeByEmail(@RequestParam String email) {
         return ResponseEntity.ok(employeeService.getData(email));
     }
 
-    // ➜ Delete Employee by Email
+    //  Delete Employee by Email
     @DeleteMapping
     public ResponseEntity<?> deleteEmployee(@RequestParam String email) {
         return employeeService.delete(email);
     }
 
-    // ➜ Get All Employees
+    //  Get All Employees
     @GetMapping
     public List<Employee> getAllEmployees() {
         return employeeService.findAll();
     }
 
-    // ➜ Get Employee by ID
+    //  Get Employee by ID
     @GetMapping("/{id}")
     public ResponseEntity<?> getEmployeeById(@PathVariable Long id) {
         return ResponseEntity.ok(employeeService.findById(id));
